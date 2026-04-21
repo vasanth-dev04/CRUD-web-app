@@ -100,7 +100,7 @@ const deleteUser = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
     const user = users[0];
-    if (user.photo) {                    // ✅ was: userPhoto (undefined)
+    if (user.photo) {                           // ← fixed
       const photoPath = path.join(__dirname, "../uploads", user.photo);
       try {
         await fsPromises.unlink(photoPath);
@@ -114,7 +114,7 @@ const deleteUser = async (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.json({ message: "User deleted successfully" });  // ✅ was: res.json9
+    res.json({ message: "User deleted successfully" }); // ← fixed
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
